@@ -50,7 +50,7 @@ const chats: ChatPreview[] = [
   },
 ]
 
-export const getChatsPreview = async () => {
+export const getChatsPreview = async (): Promise<ChatPreview[]> => {
   await sleep(3000)
 
   return chats
