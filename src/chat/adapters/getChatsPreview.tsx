@@ -9,7 +9,11 @@ const chats: ChatPreview[] = [
     isGroup: false,
     img: '',
     lastMessage: {
-      sender: 'John Doe',
+      sender: {
+        id: '1',
+        name: 'John Doe',
+        img: '',
+      },
       message: 'Hello, World!',
       sentAt: '2024-03-24T12:37:00Z',
     },
@@ -20,7 +24,11 @@ const chats: ChatPreview[] = [
     isGroup: false,
     img: '',
     lastMessage: {
-      sender: 'Jane Doe',
+      sender: {
+        id: '2',
+        name: 'Jane Doe',
+        img: '',
+      },
       message: 'Hello, World!',
       sentAt: '2024-03-20T12:00:00Z',
     },
@@ -31,7 +39,11 @@ const chats: ChatPreview[] = [
     isGroup: true,
     img: '',
     lastMessage: {
-      sender: 'John Doe',
+      sender: {
+        id: '1',
+        name: 'John Doe',
+        img: '',
+      },
       message: 'Hello, World!',
       sentAt: '2024-03-13T12:00:00Z',
     },

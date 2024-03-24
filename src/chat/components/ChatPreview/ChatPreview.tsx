@@ -10,7 +10,9 @@ import { getSentAtLabel } from './ChatPreviewUtils'
 interface Props extends IChatPreview {}
 
 export const ChatPreview = ({ id, name, lastMessage, img, isGroup }: Props) => {
-  const message = isGroup ? `~${lastMessage.sender}: ${lastMessage.message}` : lastMessage.message
+  const message = isGroup
+    ? `~${lastMessage.sender.name}: ${lastMessage.message}`
+    : lastMessage.message
 
   return (
     <ChatLink chatId={id} className='flex h-[74px] w-full gap-3 px-4 py-3'>
