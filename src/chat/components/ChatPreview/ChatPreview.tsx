@@ -1,9 +1,7 @@
 import type { ChatPreview as IChatPreview } from '@/chat/types/ChatPreview'
 
-import Image from 'next/image'
-
 import { ChatLink } from '../ChatLink/ChatLink'
-import { DefaultAvatar } from '../icons/DefaultAvatar'
+import { ProfilePicture } from '../ProfilePicture/ProfilePicture'
 
 import { getSentAtLabel } from './ChatPreviewUtils'
 
@@ -17,11 +15,7 @@ export const ChatPreview = ({ id, name, lastMessage, img, isGroup }: Props) => {
   return (
     <ChatLink chatId={id} className='flex h-[74px] w-full gap-3 px-4 py-3'>
       <div className='basis-[50px]'>
-        {img ? (
-          <Image alt='Chat Icon' className='rounded-full' height={50} src={img} width={50} />
-        ) : (
-          <DefaultAvatar height={50} width={50} />
-        )}
+        <ProfilePicture alt={name} size={50} src={img} />
       </div>
       <div className='flex w-1 grow flex-col justify-center'>
         <div className='flex items-end justify-between gap-2'>
