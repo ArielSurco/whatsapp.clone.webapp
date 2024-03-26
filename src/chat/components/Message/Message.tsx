@@ -30,25 +30,41 @@ const msgContainerStyles = cva(['flex gap-[10px] mb-3'], {
 })
 
 const bubbleStyles = cva(
-  [
-    'relative flex flex-col gap-[2px] ',
-    'w-fit max-w-[400px] bg-primary-550 p-2',
-    'rounded-lg rounded-tl-none',
-  ],
+  ['relative flex flex-col gap-[2px] ', 'w-fit max-w-[400px] p-2', 'rounded-lg'],
   {
     variants: {
-      isGroupedMessage: {
-        true: 'rounded-tl-lg',
-      },
       groupedPosition: {
-        first: 'rounded-tl-none',
-        middle: 'rounded-tl-lg',
-        last: 'rounded-tl-lg',
+        first: '',
+        middle: '',
+        last: '',
       },
       isOwnMessage: {
-        true: 'bg-success-700 rounded-lg rounded-tr-none',
+        true: 'bg-success-700',
+        false: 'bg-primary-550',
       },
     },
+    compoundVariants: [
+      {
+        isOwnMessage: true,
+        groupedPosition: 'first',
+        class: 'rounded-tr-none',
+      },
+      {
+        isOwnMessage: false,
+        groupedPosition: 'first',
+        class: 'rounded-tl-none',
+      },
+      {
+        isOwnMessage: true,
+        groupedPosition: undefined,
+        class: 'rounded-tr-none',
+      },
+      {
+        isOwnMessage: false,
+        groupedPosition: undefined,
+        class: 'rounded-tl-none',
+      },
+    ],
   },
 )
 
@@ -81,7 +97,7 @@ export const Message = ({
       {!isOwnMessage && isGroupChat && notGroupedOrFirst && (
         <ProfilePicture alt={sender.name} size={28} src={sender.img} />
       )}
-      <div className={cn(bubbleStyles({ isGroupedMessage, groupedPosition, isOwnMessage }))}>
+      <div className={cn(bubbleStyles({ groupedPosition, isOwnMessage }))}>
         {notGroupedOrFirst && <span className={messageTailStyles({ isOwnMessage })} />}
         {!isOwnMessage && isGroupChat && notGroupedOrFirst && (
           <span className='text-xs'>~ {sender.name}</span>

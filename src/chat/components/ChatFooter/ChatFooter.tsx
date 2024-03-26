@@ -12,15 +12,16 @@ export const ChatFooter = () => {
 
   const { sendMessage } = useChat()
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputValue) {
       sendMessage(inputValue)
+      setInputValue('')
     }
   }
 
   return (
     <footer className='flex h-16 items-center gap-4 bg-primary-550 px-4 py-[10px]'>
-      <ChatInput onChange={(event) => setInputValue(event.target.value)} />
+      <ChatInput onChange={(event) => setInputValue(event.target.value)} value={inputValue} />
       <button className='h-fit w-fit' onClick={handleSendMessage}>
         <SendMessage className='text-light-500' height={24} width={24} />
       </button>
