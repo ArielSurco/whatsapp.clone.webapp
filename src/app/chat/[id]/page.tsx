@@ -1,16 +1,20 @@
 import { notFound } from 'next/navigation'
 
+import { getChatDetail } from '@/chat/adapters/getChatDetail'
 import { Message } from '@/chat/components/Message/Message'
-import { sleep } from '@/shared/utils/adapters'
+import { ProfilePicture } from '@/chat/components/ProfilePicture/ProfilePicture'
 
 export default async function ChatPage({ params }: { params: { id: string } }) {
   if (!params.id) notFound()
 
-  await sleep(1000)
+  const chatDetail = await getChatDetail(params.id)
 
   return (
     <section className='flex h-full flex-col bg-primary-950 text-light-100'>
-      <header className=' h-[60px] bg-primary-550 px-4 py-[10px]'>Chat name</header>
+      <header className='flex h-[60px] items-center gap-4 bg-primary-550 px-4 py-[10px]'>
+        <ProfilePicture alt='Chat image' size={40} src={chatDetail.img} />
+        <p className='text-base font-bold text-light-100'>{chatDetail.name}</p>
+      </header>
       <main className='flex grow flex-col bg-chat-pattern px-10 pt-3'>
         <Message
           groupedPosition='first'
