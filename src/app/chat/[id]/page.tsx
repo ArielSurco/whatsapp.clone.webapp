@@ -1,8 +1,10 @@
 import { notFound } from 'next/navigation'
 
 import { getChatDetail } from '@/chat/adapters/getChatDetail'
+import { ChatInput } from '@/chat/components/ChatInput/ChatInput'
 import { Message } from '@/chat/components/Message/Message'
 import { ProfilePicture } from '@/chat/components/ProfilePicture/ProfilePicture'
+import { SendMessage } from '@/chat/components/icons/SendMessage'
 
 export default async function ChatPage({ params }: { params: { id: string } }) {
   if (!params.id) notFound()
@@ -48,7 +50,12 @@ export default async function ChatPage({ params }: { params: { id: string } }) {
           sentAt='2021-09-01T20:15:00'
         />
       </main>
-      <footer className='h-16 bg-primary-550'>Input</footer>
+      <footer className='flex h-16 items-center gap-4 bg-primary-550 px-4 py-[10px]'>
+        <ChatInput />
+        <button className='h-fit w-fit'>
+          <SendMessage className='text-light-500' height={24} width={24} />
+        </button>
+      </footer>
     </section>
   )
 }
