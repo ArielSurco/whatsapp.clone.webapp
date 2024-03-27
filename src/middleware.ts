@@ -9,13 +9,6 @@ export function middleware(request: NextRequest) {
   response.headers.set('x-pathname', request.nextUrl.pathname)
 
   return response
-  // return NextResponse.next({
-  //   request: {
-  //     // Attach the pathname of the next request to the headers
-  //     // So can be accessed with the headers() function
-  //     'x-pathname': request.nextUrl.pathname,
-  //   },
-  // })
 }
 
 export const config = {

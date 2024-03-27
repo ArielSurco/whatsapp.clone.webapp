@@ -6,8 +6,8 @@ const chatDetail: ChatDetail = {
   id: '1',
   name: 'John Doe',
   img: '',
-  phone: '1234567890',
-  isGroup: false,
+  members: [],
+  isGroup: true,
 }
 
 export const getChatDetail = async (_chatId: string): Promise<ChatDetail> => {
