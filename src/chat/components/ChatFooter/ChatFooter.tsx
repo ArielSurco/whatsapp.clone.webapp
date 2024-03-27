@@ -14,7 +14,7 @@ export const ChatFooter = () => {
 
   const handleSendMessage = async () => {
     if (inputValue) {
-      sendMessage(inputValue)
+      await sendMessage(inputValue)
       setInputValue('')
     }
   }

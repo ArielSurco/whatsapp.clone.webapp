@@ -4,10 +4,14 @@ export const withSuspense = <T,>(
   Component: (p: T) => ReactElement | Promise<ReactElement>,
   fallback: ReactNode,
 ) =>
-  function SuspenseWrapper(props: T & JSX.IntrinsicAttributes) {
+  function SuspenseWrapper(props: T) {
     return (
       <Suspense fallback={fallback}>
-        <Component {...props} />
+        {/*
+          Necessary casting to use withSuspense on parallel routes
+          because currently doesn't work the loading.tsx file on parallel routes
+        */}
+        <Component {...(props as T & JSX.IntrinsicAttributes)} />
       </Suspense>
     )
   }
