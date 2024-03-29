@@ -4,8 +4,8 @@ import type { Message } from '../types/Message'
 
 import { createContext, ReactNode, useContext, useState } from 'react'
 
-import { sleep } from '@/shared/utils/adapters'
 import { getRandomUserName } from '@/shared/utils/mockData'
+import { sleep } from '@/shared/utils/services'
 
 import { ChatDetail } from '../types/ChatDetail'
 

@@ -1,4 +1,4 @@
-import { sleep } from '@/shared/utils/adapters'
+import { sleep } from '@/shared/utils/services'
 
 import { ChatDetail } from '../types/ChatDetail'
 

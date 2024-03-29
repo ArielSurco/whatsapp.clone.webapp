@@ -1,6 +1,6 @@
 import type { ChatPreview } from '../types/ChatPreview'
 
-import { sleep } from '@/shared/utils/adapters'
+import { sleep } from '@/shared/utils/services'
 
 const chats: ChatPreview[] = [
   {

@@ -1,6 +1,6 @@
 import type { Message } from '../types/Message'
 
-import { sleep } from '@/shared/utils/adapters'
+import { sleep } from '@/shared/utils/services'
 
 const messages: Message[] = [
   {
