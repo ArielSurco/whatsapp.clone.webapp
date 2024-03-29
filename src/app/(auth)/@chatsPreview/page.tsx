@@ -1,5 +1,5 @@
-import { getChatsPreview } from '@/chat/adapters/getChatsPreview'
 import { ChatPreview } from '@/chat/components/ChatPreview/ChatPreview'
+import { getChatsPreview } from '@/chat/services/getChatsPreview'
 import { withSuspense } from '@/shared/utils/loaders'
 
 import Loading from './loading'
