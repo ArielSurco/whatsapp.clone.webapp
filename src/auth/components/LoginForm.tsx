@@ -8,21 +8,16 @@ interface Props {
 
 const fieldStyle = 'w-full flex flex-col gap-1 text-light-300'
 
-export const RegisterForm = ({ onSubmit }: Props) => {
+export const LoginForm = ({ onSubmit }: Props) => {
   return (
     <form
       action={onSubmit}
       className='flex w-full min-w-[400px] max-w-[500px] flex-col gap-3 rounded-xl bg-primary-550 p-4 text-light-100'
     >
-      <h1 className='text-center text-2xl font-semibold text-light-100'>Create your account</h1>
+      <h1 className='text-center text-2xl font-semibold text-light-100'>Log in</h1>
       <label className={fieldStyle}>
         <span>Username</span>
         <Input name='username' placeholder='Enter your username' />
-      </label>
-
-      <label className={fieldStyle}>
-        <span>Email</span>
-        <Input name='email' placeholder='Enter your email' type='email' />
       </label>
 
       <label className={fieldStyle}>
@@ -39,9 +34,9 @@ export const RegisterForm = ({ onSubmit }: Props) => {
         </button>
 
         <div className='flex gap-2'>
-          <span>Have an account?</span>
-          <Link className='text-success-300' href='/login'>
-            Log in
+          <span>Don&apos;t have an an account?</span>
+          <Link className='text-success-300' href='/register'>
+            Sign up
           </Link>
         </div>
       </div>
