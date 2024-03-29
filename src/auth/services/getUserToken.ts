@@ -5,27 +5,24 @@ import { z } from 'zod'
 import { api } from '@/shared/services/api'
 import { validateSchema } from '@/shared/utils/services'
 
-interface CreateUserParams {
+interface GetUserTokenParams {
   username: string
-  email: string
   password: string
 }
 
 const responseSchema = z.object({
-  message: z.string(),
+  token: z.string(),
 })
 
-type CreateUserResponse = z.infer<typeof responseSchema>
+type GetUserTokenResponse = z.infer<typeof responseSchema>
 
-export const createUser = async ({
+export const getUserToken = async ({
   username,
-  email,
   password,
-}: CreateUserParams): Promise<CreateUserResponse> => {
-  const response = await api.post('/user/register', {
+}: GetUserTokenParams): Promise<GetUserTokenResponse> => {
+  const response = await api.post('/user/login', {
     body: {
       username,
-      email,
       password,
     },
   })
