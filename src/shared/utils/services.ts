@@ -6,10 +6,16 @@ export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve
 
 export const validateSchema = async <T>(schema: z.ZodType<T>, data: unknown) => {
   try {
-    return schema.parse(data)
+    const validatedData = await schema.parse(data)
+
+    return validatedData
   } catch (error) {
     if (ENV.NODE_ENV === 'development' && error instanceof z.ZodError) {
-      throw new Error(error.errors.map((err) => err.message).join('\n'))
+      const errorMessages = error.issues
+        .map((issue) => `${issue.path}: ${issue.message}`)
+        .join('\n')
+
+      throw new Error(errorMessages)
     }
 
     throw new Error('Something went wrong')

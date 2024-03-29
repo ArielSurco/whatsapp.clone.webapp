@@ -9,10 +9,16 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ token }) {
+    async jwt({ token, user }) {
+      if (user) {
+        token.access_token = user.access_token
+      }
+
       return token
     },
-    async session({ session }) {
+    async session({ session, token }) {
+      session.access_token = token.access_token
+
       return session
     },
   },
@@ -37,7 +43,7 @@ export const authOptions: NextAuthOptions = {
             id: user.id,
             name: user.username,
             email: user.email,
-            jwt: token,
+            access_token: token,
           }
         } catch (err) {
           return null

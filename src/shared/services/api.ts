@@ -1,4 +1,5 @@
 import { ENV } from '../constants/environment'
+import { getServerToken } from '../utils/getServerToken'
 
 interface GetRequestInit extends Omit<RequestInit, 'method'> {}
 
@@ -8,11 +9,14 @@ const checkResponse = (response: Response) => {
   }
 }
 
-const apiGet = async <T>(uri: string, { headers, ...init }: GetRequestInit): Promise<T> => {
+const apiGet = async <T>(uri: string, { headers, ...init }: GetRequestInit = {}): Promise<T> => {
+  const jwt = await getServerToken()
+
   const response = await fetch(`${ENV.API_URL}${uri}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: jwt ? `Bearer ${jwt}` : '',
       ...headers,
     },
     ...init,
@@ -29,11 +33,13 @@ interface PostRequestInit extends Omit<RequestInit, 'method' | 'body'> {
 }
 
 const apiPost = async <T>(uri: string, { body, headers, ...init }: PostRequestInit): Promise<T> => {
+  const jwt = await getServerToken()
   const response = await fetch(`${ENV.API_URL}${uri}`, {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {
       'Content-Type': 'application/json',
+      Authorization: jwt ? `Bearer ${jwt}` : '',
       ...headers,
     },
     ...init,

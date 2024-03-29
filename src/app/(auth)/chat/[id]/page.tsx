@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation'
 
-import { getChatDetail } from '@/chat/adapters/getChatDetail'
 import { ChatFooter } from '@/chat/components/ChatFooter/ChatFooter'
 import { ChatMessages } from '@/chat/components/ChatMessages/ChatMessages'
 import { ProfilePicture } from '@/chat/components/ProfilePicture/ProfilePicture'
 import { ChatProvider } from '@/chat/context/ChatContext'
+import { getChatDetail } from '@/chat/services/getChatDetail'
 
 export default async function ChatPage({ params }: { params: { id: string } }) {
   if (!params.id) notFound()

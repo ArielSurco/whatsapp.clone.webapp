@@ -22,6 +22,7 @@ export async function middleware(request: NextRequest) {
   const response = NextResponse.next()
 
   response.headers.set('x-pathname', pathname)
+  response.headers.set('Authorization', token?.access_token ?? '')
 
   return response
 }
