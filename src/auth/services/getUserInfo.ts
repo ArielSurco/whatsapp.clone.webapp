@@ -11,7 +11,7 @@ interface GetUserInfoParams {
 
 const responseSchema = z.object({
   id: z.string(),
-  name: z.string(),
+  username: z.string(),
   email: z.string(),
 })
 

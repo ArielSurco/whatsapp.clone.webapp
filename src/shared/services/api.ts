@@ -8,9 +8,13 @@ const checkResponse = (response: Response) => {
   }
 }
 
-const apiGet = async <T>(uri: string, init: GetRequestInit): Promise<T> => {
+const apiGet = async <T>(uri: string, { headers, ...init }: GetRequestInit): Promise<T> => {
   const response = await fetch(`${ENV.API_URL}${uri}`, {
     method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      ...headers,
+    },
     ...init,
   })
 

@@ -1,28 +1,71 @@
+'use client'
+
+import { signIn } from 'next-auth/react'
 import Link from 'next/link'
+import { ChangeEvent, useCallback, useState } from 'react'
 
 import { Input } from '@/shared/components/Input'
 
-interface Props {
-  onSubmit: (event: FormData) => Promise<void>
+interface FormValues {
+  username: string
+  password: string
 }
+
+type FormField = keyof FormValues
 
 const fieldStyle = 'w-full flex flex-col gap-1 text-light-300'
 
-export const LoginForm = ({ onSubmit }: Props) => {
+export const LoginForm = () => {
+  const [values, setValues] = useState({
+    username: '',
+    password: '',
+  })
+
+  const handleChange = (field: FormField) => (event: ChangeEvent<HTMLInputElement>) => {
+    setValues((prev) => ({
+      ...prev,
+      [field]: event.target.value,
+    }))
+  }
+
+  const handleSubmit = useCallback(async () => {
+    const response = await signIn('credentials', {
+      username: values.username,
+      password: values.password,
+      redirect: false,
+    })
+
+    console.log(response)
+  }, [values])
+
   return (
     <form
-      action={onSubmit}
       className='flex w-full min-w-[400px] max-w-[500px] flex-col gap-3 rounded-xl bg-primary-550 p-4 text-light-100'
+      onSubmit={(e) => {
+        e.preventDefault()
+        handleSubmit()
+      }}
     >
       <h1 className='text-center text-2xl font-semibold text-light-100'>Log in</h1>
       <label className={fieldStyle}>
         <span>Username</span>
-        <Input name='username' placeholder='Enter your username' />
+        <Input
+          name='username'
+          onChange={handleChange('username')}
+          placeholder='Enter your username'
+          value={values.username}
+        />
       </label>
 
       <label className={fieldStyle}>
         <span>Password</span>
-        <Input name='password' placeholder='Enter your password' type='password' />
+        <Input
+          name='password'
+          onChange={handleChange('password')}
+          placeholder='Enter your password'
+          type='password'
+          value={values.password}
+        />
       </label>
 
       <div className='mt-2 flex items-center justify-between gap-2'>
@@ -30,7 +73,7 @@ export const LoginForm = ({ onSubmit }: Props) => {
           className='bg-success-500 w-fit rounded-full px-6 py-[10px] font-bold text-light-100'
           type='submit'
         >
-          Register
+          Log in
         </button>
 
         <div className='flex gap-2'>

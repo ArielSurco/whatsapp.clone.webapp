@@ -5,6 +5,17 @@ import { getUserInfo } from '@/auth/services/getUserInfo'
 import { getUserToken } from '@/auth/services/getUserToken'
 
 export const authOptions: NextAuthOptions = {
+  session: {
+    strategy: 'jwt',
+  },
+  callbacks: {
+    async jwt({ token }) {
+      return token
+    },
+    async session({ session }) {
+      return session
+    },
+  },
   providers: [
     Credentials({
       id: 'credentials',
@@ -24,7 +35,7 @@ export const authOptions: NextAuthOptions = {
 
           return {
             id: user.id,
-            username: user.name,
+            username: user.username,
             email: user.email,
             jwt: token,
           }
