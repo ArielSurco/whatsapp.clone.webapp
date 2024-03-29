@@ -3,8 +3,8 @@
 import { useState } from 'react'
 
 import { useChat } from '@/chat/context/ChatContext'
+import { Input } from '@/shared/components/Input'
 
-import { ChatInput } from '../ChatInput/ChatInput'
 import { SendMessage } from '../icons/SendMessage'
 
 export const ChatFooter = () => {
@@ -21,7 +21,7 @@ export const ChatFooter = () => {
 
   return (
     <footer className='flex h-16 items-center gap-4 bg-primary-550 px-4 py-[10px]'>
-      <ChatInput onChange={(event) => setInputValue(event.target.value)} value={inputValue} />
+      <Input onChange={(event) => setInputValue(event.target.value)} value={inputValue} />
       <button className='h-fit w-fit' onClick={handleSendMessage}>
         <SendMessage className='text-light-500' height={24} width={24} />
       </button>

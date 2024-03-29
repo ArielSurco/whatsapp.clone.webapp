@@ -8,6 +8,8 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/chat/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/auth/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/shared/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -28,6 +30,8 @@ const config: Config = {
         'light-300': '#d1d7db',
         'light-500': '#8696a0',
 
+        'success-300': '#00a884',
+        'success-500': '#008069',
         'success-700': '#005c4b',
       },
     },
