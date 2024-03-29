@@ -2,6 +2,7 @@
 
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { ChangeEvent, useCallback, useState } from 'react'
 
 import { Input } from '@/shared/components/Input'
@@ -21,6 +22,8 @@ export const LoginForm = () => {
     password: '',
   })
 
+  const router = useRouter()
+
   const handleChange = (field: FormField) => (event: ChangeEvent<HTMLInputElement>) => {
     setValues((prev) => ({
       ...prev,
@@ -29,14 +32,14 @@ export const LoginForm = () => {
   }
 
   const handleSubmit = useCallback(async () => {
-    const response = await signIn('credentials', {
+    await signIn('credentials', {
       username: values.username,
       password: values.password,
       redirect: false,
     })
 
-    console.log(response)
-  }, [values])
+    router.push('/')
+  }, [values, router])
 
   return (
     <form
