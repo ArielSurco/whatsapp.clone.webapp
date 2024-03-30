@@ -23,6 +23,7 @@ export async function middleware(request: NextRequest) {
 
   response.headers.set('x-pathname', pathname)
   response.headers.set('Authorization', token?.access_token ?? '')
+  response.headers.set('x-user-id', token?.id ?? '')
 
   return response
 }

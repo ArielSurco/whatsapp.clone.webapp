@@ -5,54 +5,6 @@ import { z } from 'zod'
 import { api } from '@/shared/services/api'
 import { validateSchema } from '@/shared/utils/services'
 
-const chats: ChatPreview[] = [
-  {
-    id: '1',
-    name: 'John Doe',
-    isGroup: false,
-    img: '',
-    lastMessage: {
-      sender: {
-        id: '1',
-        name: 'John Doe',
-        img: '',
-      },
-      message: 'Hello, World!',
-      sentAt: '2024-03-24T12:37:00Z',
-    },
-  },
-  {
-    id: '2',
-    name: 'Jane Doe',
-    isGroup: false,
-    img: '',
-    lastMessage: {
-      sender: {
-        id: '2',
-        name: 'Jane Doe',
-        img: '',
-      },
-      message: 'Hello, World!',
-      sentAt: '2024-03-20T12:00:00Z',
-    },
-  },
-  {
-    id: '3',
-    name: 'Group Chat',
-    isGroup: true,
-    img: '',
-    lastMessage: {
-      sender: {
-        id: '1',
-        name: 'John Doe',
-        img: '',
-      },
-      message: 'Hello, World!',
-      sentAt: '2024-03-13T12:00:00Z',
-    },
-  },
-]
-
 const responseSchema = z.array(
   z.object({
     name: z.string(),
