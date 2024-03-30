@@ -45,6 +45,22 @@ const config: Config = {
         '.message-tail-reverse': {
           clipPath: 'polygon(0 0, 100% 0, 0 100%, 0 0)',
         },
+        '.scrollbar': {
+          '&::-webkit-scrollbar': {
+            width: '6px',
+          },
+          '&::-webkit-scrollbar-track': {
+            backgroundColor: 'transparent',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: 'rgba(255 255 255 / 0.16)',
+          },
+          '&::-webkit-scrollbar-button': {
+            display: 'block',
+            width: '4px',
+            height: '4px',
+          },
+        },
       })
     }),
   ],
