@@ -5,14 +5,18 @@ import { ChatMessages } from '@/chat/components/ChatMessages/ChatMessages'
 import { ProfilePicture } from '@/chat/components/ProfilePicture/ProfilePicture'
 import { ChatProvider } from '@/chat/context/ChatContext'
 import { getChatDetail } from '@/chat/services/getChatDetail'
+import { getChatMessages } from '@/chat/services/getChatMessages'
 
 export default async function ChatPage({ params }: { params: { id: string } }) {
   if (!params.id) notFound()
 
-  const chatDetail = await getChatDetail(params.id)
+  const [chatDetail, messages] = await Promise.all([
+    getChatDetail(params.id),
+    getChatMessages(params.id),
+  ])
 
   return (
-    <ChatProvider initialChatDetail={chatDetail} initialMessages={[]}>
+    <ChatProvider initialChatDetail={chatDetail} initialMessages={messages}>
       <section className='flex h-full max-h-screen flex-col bg-primary-950 text-light-100'>
         <header className='flex h-[60px] items-center gap-4 bg-primary-550 px-4 py-[10px]'>
           <ProfilePicture alt='Chat image' size={40} src={chatDetail.img} />
