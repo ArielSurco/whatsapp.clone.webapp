@@ -36,8 +36,8 @@ export const ChatMessages = () => {
     <Message
       groupedPosition={getGroupedPosition(messages, index)}
       isGroupChat={Boolean(chat?.isGroup)}
-      isOwnMessage={message.sender.id === 'me'}
-      key={index}
+      isOwnMessage={message.isOwn}
+      key={message.id}
       message={message.message}
       sender={message.sender}
       sentAt={message.sentAt}

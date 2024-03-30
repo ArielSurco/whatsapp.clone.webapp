@@ -4,9 +4,7 @@ import type { Message } from '../types/Message'
 
 import { createContext, ReactNode, useContext, useState } from 'react'
 
-import { getRandomUserName } from '@/shared/utils/mockData'
-import { sleep } from '@/shared/utils/services'
-
+import { sendMessage as sendMessageService } from '../services/sendMessage'
 import { ChatDetail } from '../types/ChatDetail'
 
 interface ChatContext {
@@ -32,23 +30,9 @@ export const ChatProvider = ({
   const [chatDetail] = useState<ChatDetail | null>(initialChatDetail)
 
   const sendMessage = async (message: string) => {
-    const userName = getRandomUserName()
+    const newMessage = await sendMessageService(chatDetail?.id ?? '', message)
 
-    await sleep(1000)
-
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      {
-        id: prevMessages.length + 1,
-        sender: {
-          id: userName,
-          name: userName,
-          img: '',
-        },
-        message,
-        sentAt: new Date().toISOString(),
-      },
-    ])
+    setMessages((prevMessages) => [...prevMessages, newMessage])
   }
 
   return (

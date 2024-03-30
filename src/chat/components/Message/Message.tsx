@@ -6,7 +6,7 @@ import { cn } from '@/shared/utils/classNames'
 
 import { ProfilePicture } from '../ProfilePicture/ProfilePicture'
 
-interface Props extends IMessage {
+interface Props extends Omit<IMessage, 'id' | 'isOwn'> {
   groupedPosition?: 'first' | 'middle' | 'last'
   isGroupChat: boolean
   isOwnMessage: boolean

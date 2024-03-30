@@ -3,6 +3,7 @@ import type { Message } from '../types/Message'
 import { z } from 'zod'
 
 import { api } from '@/shared/services/api'
+import { getServerUserId } from '@/shared/utils/getServerUserId'
 import { validateSchema } from '@/shared/utils/services'
 
 const responseSchema = z.array(
@@ -22,6 +23,8 @@ export const getChatMessages = async (chatId: string): Promise<Message[]> => {
 
   const data = await validateSchema(responseSchema, response)
 
+  const userId = await getServerUserId()
+
   const messages: Message[] = data.map((message) => ({
     id: message.id,
     message: message.text,
@@ -31,6 +34,7 @@ export const getChatMessages = async (chatId: string): Promise<Message[]> => {
       name: message.sender.username,
       img: '',
     },
+    isOwn: userId === message.sender.id,
   }))
 
   return messages

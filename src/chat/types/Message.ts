@@ -5,4 +5,5 @@ export interface Message {
   sentAt: string
   message: string
   sender: Sender
+  isOwn: boolean
 }
