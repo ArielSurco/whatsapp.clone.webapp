@@ -37,5 +37,6 @@ export const getChatMessages = async (chatId: string): Promise<Message[]> => {
     isOwn: userId === message.sender.id,
   }))
 
-  return messages
+  // Reverse the messages to show the latest messages at the bottom us
+  return messages.reverse()
 }

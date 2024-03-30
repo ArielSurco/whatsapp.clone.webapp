@@ -2,7 +2,9 @@
 
 import type { Message } from '../types/Message'
 
-import { createContext, ReactNode, useContext, useState } from 'react'
+import { createContext, ReactNode, useCallback, useContext, useState } from 'react'
+
+import { sleep } from '@/shared/utils/services'
 
 import { sendMessage as sendMessageService } from '../services/sendMessage'
 import { ChatDetail } from '../types/ChatDetail'
@@ -10,7 +12,9 @@ import { ChatDetail } from '../types/ChatDetail'
 interface ChatContext {
   messages: Message[]
   chat: ChatDetail | null
+  isLoading: boolean
   sendMessage: (message: string) => Promise<void>
+  fetchMoreMessages: () => Promise<void>
 }
 
 interface ChatProviderProps {
@@ -28,6 +32,7 @@ export const ChatProvider = ({
 }: ChatProviderProps) => {
   const [messages, setMessages] = useState<Message[]>(initialMessages)
   const [chatDetail] = useState<ChatDetail | null>(initialChatDetail)
+  const [isLoading, setIsLoading] = useState(false)
 
   const sendMessage = async (message: string) => {
     const newMessage = await sendMessageService(chatDetail?.id ?? '', message)
@@ -35,8 +40,20 @@ export const ChatProvider = ({
     setMessages((prevMessages) => [...prevMessages, newMessage])
   }
 
+  const fetchMoreMessages = useCallback(async () => {
+    if (isLoading) return
+
+    setIsLoading(true)
+
+    await sleep(5000)
+
+    setIsLoading(false)
+  }, [isLoading])
+
   return (
-    <ChatContext.Provider value={{ messages, chat: chatDetail, sendMessage }}>
+    <ChatContext.Provider
+      value={{ messages, chat: chatDetail, isLoading, sendMessage, fetchMoreMessages }}
+    >
       {children}
     </ChatContext.Provider>
   )
