@@ -3,6 +3,7 @@ import type { ChatPreview } from '../types/ChatPreview'
 import { z } from 'zod'
 
 import { api } from '@/shared/services/api'
+import { getServerUserId } from '@/shared/utils/getServerUserId'
 import { validateSchema } from '@/shared/utils/services'
 
 const responseSchema = z.array(
@@ -29,12 +30,15 @@ export const getChatsPreview = async (): Promise<ChatPreview[]> => {
 
   const data = await validateSchema(responseSchema, response)
 
+  const userId = await getServerUserId()
+
   const adaptedData: ChatPreview[] = data.map((chat) => ({
     id: chat.id,
     img: '',
     isGroup: chat.isGroup,
     name: chat.name,
     lastMessage: {
+      id: chat.lastMessage?.id ?? '',
       message: chat.lastMessage?.text ?? '',
       sentAt: chat.lastMessage?.createdAt ?? '',
       sender: {
@@ -42,6 +46,7 @@ export const getChatsPreview = async (): Promise<ChatPreview[]> => {
         img: '',
         name: chat.lastMessage?.sender.username ?? '',
       },
+      isOwn: chat.lastMessage?.sender.id === userId,
     },
   }))
 

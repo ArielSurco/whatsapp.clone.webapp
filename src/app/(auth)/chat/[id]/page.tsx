@@ -11,13 +11,17 @@ import { getChatMessages } from '@/chat/services/getChatMessages'
 export default async function ChatPage({ params }: { params: { id: string } }) {
   if (!params.id) notFound()
 
-  const [chatDetail, messages] = await Promise.all([
+  const [chatDetail, messagesResponse] = await Promise.all([
     getChatDetail(params.id),
     getChatMessages(params.id),
   ])
 
   return (
-    <ChatProvider initialChatDetail={chatDetail} initialMessages={messages}>
+    <ChatProvider
+      initialChatDetail={chatDetail}
+      initialMessages={messagesResponse.messages}
+      initialPagination={messagesResponse.pagination}
+    >
       <section className='flex h-full max-h-screen flex-col bg-primary-950 text-light-100'>
         <header className='flex h-[60px] items-center gap-4 bg-primary-550 px-4 py-[10px]'>
           <ProfilePicture alt='Chat image' size={40} src={chatDetail.img} />

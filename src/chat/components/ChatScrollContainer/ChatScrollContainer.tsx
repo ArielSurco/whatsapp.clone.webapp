@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, useEffect, useRef } from 'react'
+import { ReactNode, useCallback, useEffect, useRef } from 'react'
 
 import { useChat } from '@/chat/context/ChatContext'
 import { windowExists } from '@/shared/utils/windowExists'
@@ -15,16 +15,16 @@ export const ChatScrollContainer = ({ children }: Props) => {
   const { isLoading, fetchMoreMessages } = useChat()
   const scrollRef = useRef<HTMLDivElement>(null)
 
-  const handleScroll = async () => {
+  const handleScroll = useCallback(async () => {
     if (!scrollRef.current) return
     const { scrollHeight, scrollTop, offsetHeight } = scrollRef.current
 
     const isAtTop = scrollHeight + scrollTop === offsetHeight
 
-    if (isAtTop) {
+    if (isAtTop && !isLoading) {
       fetchMoreMessages()
     }
-  }
+  }, [isLoading])
 
   useEffect(() => {
     if (!windowExists()) return () => {}
