@@ -5,6 +5,8 @@ import { ReactNode, useEffect, useRef } from 'react'
 import { useChat } from '@/chat/context/ChatContext'
 import { windowExists } from '@/shared/utils/windowExists'
 
+import { Spinner } from '../icons/Spinner'
+
 interface Props {
   children: ReactNode
 }
@@ -36,11 +38,17 @@ export const ChatScrollContainer = ({ children }: Props) => {
 
   return (
     <main
-      className='scrollbar flex w-full grow flex-col-reverse overflow-auto bg-chat-pattern px-10 pt-3'
+      className='flex w-full grow flex-col-reverse overflow-auto bg-chat-pattern px-10 pt-3 scrollbar'
       ref={scrollRef}
     >
       {children}
-      {isLoading && <p className='relative flex w-full justify-center'>Loading...</p>}
+      {isLoading && (
+        <div className='relative -bottom-10 flex w-full justify-center' role='status'>
+          <div className='rounded-full bg-primary-525 p-2'>
+            <Spinner />
+          </div>
+        </div>
+      )}
     </main>
   )
 }

@@ -11,8 +11,12 @@ const getGroupedPosition = (
   index: number,
 ): 'first' | 'middle' | 'last' | undefined => {
   const message = messages[index]
-  const isPreviousMessageFromSameSender = messages[index - 1]?.sender.id === message.sender.id
-  const isNextMessageFromSameSender = messages[index + 1]?.sender.id === message.sender.id
+
+  // messages[index + 1] is the previous message because the messages are reversed
+  const isPreviousMessageFromSameSender = messages[index + 1]?.sender.id === message.sender.id
+
+  // messages[index - 1] is the next message because the messages are reversed
+  const isNextMessageFromSameSender = messages[index - 1]?.sender.id === message.sender.id
 
   if (!isPreviousMessageFromSameSender && isNextMessageFromSameSender) {
     return 'first'

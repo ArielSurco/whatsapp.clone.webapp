@@ -4,8 +4,7 @@ import type { Message } from '../types/Message'
 
 import { createContext, ReactNode, useCallback, useContext, useState } from 'react'
 
-import { sleep } from '@/shared/utils/services'
-
+import { getChatMessages } from '../services/getChatMessages'
 import { sendMessage as sendMessageService } from '../services/sendMessage'
 import { ChatDetail } from '../types/ChatDetail'
 
@@ -45,10 +44,12 @@ export const ChatProvider = ({
 
     setIsLoading(true)
 
-    await sleep(5000)
+    const newMessages = await getChatMessages(chatDetail?.id ?? '')
+
+    setMessages((prevMessages) => [...newMessages, ...prevMessages])
 
     setIsLoading(false)
-  }, [isLoading])
+  }, [isLoading, chatDetail?.id])
 
   return (
     <ChatContext.Provider
