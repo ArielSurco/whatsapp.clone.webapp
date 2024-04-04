@@ -6,14 +6,6 @@ import { validateSchema } from '@/shared/utils/services'
 
 import { ChatDetail } from '../types/ChatDetail'
 
-// const chatDetail: ChatDetail = {
-//   id: '1',
-//   name: 'John Doe',
-//   img: '',
-//   members: [],
-//   isGroup: true,
-// }
-
 const responseSchema = z.object({
   id: z.string(),
   name: z.string(),
