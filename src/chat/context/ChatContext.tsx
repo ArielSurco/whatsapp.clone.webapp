@@ -54,11 +54,11 @@ export const ChatProvider = ({
       pagination.limit,
     )
 
-    setMessages((prevMessages) => [...response.messages, ...prevMessages])
+    setMessages((prevMessages) => [...prevMessages, ...response.messages])
     setPagination(response.pagination)
 
     setIsLoading(false)
-  }, [chatDetail?.id, pagination])
+  }, [chatDetail?.id, pagination, isLoading])
 
   return (
     <ChatContext.Provider

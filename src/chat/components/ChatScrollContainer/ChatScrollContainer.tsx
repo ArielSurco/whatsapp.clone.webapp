@@ -34,7 +34,7 @@ export const ChatScrollContainer = ({ children }: Props) => {
     return () => {
       scrollRef.current?.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  }, [handleScroll])
 
   return (
     <main
