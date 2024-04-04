@@ -4,7 +4,7 @@ import Credentials from 'next-auth/providers/credentials'
 import { getUserInfo } from '@/auth/services/getUserInfo'
 import { getUserToken } from '@/auth/services/getUserToken'
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
