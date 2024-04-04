@@ -11,7 +11,7 @@ interface Props extends Omit<ComponentPropsWithoutRef<typeof Link>, 'href'> {
   chatId: string
 }
 
-const linkStyles = cva(['text-light-500 bg-primary-700 hover:bg-primary-550'], {
+const linkStyles = cva(['text-light-700 bg-primary-700 hover:bg-primary-550'], {
   variants: {
     isActive: {
       true: 'text-light-300 bg-primary-400 hover:bg-primary-400',

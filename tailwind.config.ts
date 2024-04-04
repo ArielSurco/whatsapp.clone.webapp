@@ -27,8 +27,10 @@ const config: Config = {
         'primary-950': '#0b141a',
 
         'light-100': '#e9edef',
+        'light-200': '#d9dee0',
         'light-300': '#d1d7db',
-        'light-500': '#8696a0',
+        'light-500': '#aebac1',
+        'light-700': '#8696a0',
 
         'success-300': '#00a884',
         'success-500': '#008069',
