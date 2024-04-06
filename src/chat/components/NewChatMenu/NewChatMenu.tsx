@@ -7,12 +7,16 @@ import {
   SidePanelDrawerTitle,
   SidePanelDrawerTrigger,
 } from '@/shared/components/SidePanelDrawer'
-import { UsersAlphabeticalSplit } from '@/shared/components/UsersAlphabeticalSplit'
+import { UserPreview } from '@/user/components/UserPreview/UserPreview'
 
 import { NewChat } from '../icons/NewChat'
 
+import { splitUsersByFirstLetter } from './utils'
+
 export const NewChatMenu = async () => {
   const userResults = await getUsers()
+
+  const splittedUsers = splitUsersByFirstLetter(userResults)
 
   return (
     <SidePanelDrawer>
@@ -27,7 +31,22 @@ export const NewChatMenu = async () => {
           </div>
         </SidePanelDrawerHeader>
 
-        <UsersAlphabeticalSplit users={userResults} />
+        <div>
+          {Object.entries(splittedUsers).map(([letter, letterUsers]) => (
+            <div key={letter}>
+              <h2 className='px-8 py-4 text-base text-success-500'>{letter}</h2>
+              {letterUsers.map((letterUser) => (
+                <UserPreview
+                  chatId={letterUser.chatId}
+                  id={letterUser.id}
+                  img={letterUser.img}
+                  key={letterUser.id}
+                  username={letterUser.username}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
       </SidePanelDrawerContent>
     </SidePanelDrawer>
   )
