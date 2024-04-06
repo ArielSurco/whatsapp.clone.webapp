@@ -40,7 +40,7 @@ export const ChatProvider = ({
   const sendMessage = async (message: string) => {
     const newMessage = await sendMessageService(chatDetail?.id ?? '', message)
 
-    setMessages((prevMessages) => [...prevMessages, newMessage])
+    setMessages((prevMessages) => [newMessage, ...prevMessages])
   }
 
   const fetchMoreMessages = useCallback(async () => {
