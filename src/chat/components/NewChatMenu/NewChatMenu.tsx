@@ -7,7 +7,7 @@ import {
   SidePanelDrawerTitle,
   SidePanelDrawerTrigger,
 } from '@/shared/components/SidePanelDrawer'
-import { UserPreview } from '@/user/components/UserPreview/UserPreview'
+import { UsersAlphabeticalSplit } from '@/shared/components/UsersAlphabeticalSplit'
 
 import { NewChat } from '../icons/NewChat'
 
@@ -27,17 +27,7 @@ export const NewChatMenu = async () => {
           </div>
         </SidePanelDrawerHeader>
 
-        <div className='flex w-full flex-col'>
-          {userResults.map((user) => (
-            <UserPreview
-              chatId={user.chatId}
-              id={user.id}
-              img={user.img}
-              key={user.id}
-              username={user.username}
-            />
-          ))}
-        </div>
+        <UsersAlphabeticalSplit users={userResults} />
       </SidePanelDrawerContent>
     </SidePanelDrawer>
   )

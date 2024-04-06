@@ -24,11 +24,11 @@ export const UserPreview = ({ id, username, img, chatId }: Props) => {
 
   return (
     <button
-      className='flex h-[72px] w-full gap-4 p-3 text-start hover:bg-primary-550'
+      className='flex h-[72px] w-full items-center gap-4 px-3 text-start hover:bg-primary-550'
       onClick={handleClick}
     >
-      <ProfilePicture alt='' size={50} src={img} />
-      <div>
+      <ProfilePicture alt='' className='py-3' size={50} src={img} />
+      <div className='flex h-full grow flex-col justify-center border-t border-light-700 border-opacity-15 hover:border-none'>
         <p className='text-base font-semibold text-light-100'>{username}</p>
         {/* TODO: Add status to User model in backend */}
         <p className='text-sm text-light-700'>Hey there! I am using WhatsApp.</p>

@@ -2,15 +2,23 @@ import type { ComponentProps } from 'react'
 
 import Image from 'next/image'
 
+import { cn } from '@/shared/utils/classNames'
+
 import { DefaultAvatar } from '../icons/DefaultAvatar'
 
-interface Props extends Pick<ComponentProps<typeof Image>, 'src' | 'alt'> {
+interface Props extends Pick<ComponentProps<typeof Image>, 'src' | 'alt' | 'className'> {
   size: number
 }
 
-export const ProfilePicture = ({ src, size, alt }: Props) => {
+export const ProfilePicture = ({ className, src, size, alt }: Props) => {
   return src ? (
-    <Image alt={alt} className='rounded-full' height={size} src={src} width={size} />
+    <Image
+      alt={alt}
+      className={cn('rounded-full', className)}
+      height={size}
+      src={src}
+      width={size}
+    />
   ) : (
     <DefaultAvatar height={size} width={size} />
   )
