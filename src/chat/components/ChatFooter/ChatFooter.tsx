@@ -21,7 +21,11 @@ export const ChatFooter = () => {
 
   return (
     <footer className='flex h-16 items-center gap-4 bg-primary-550 px-4 py-[10px]'>
-      <Input onChange={(event) => setInputValue(event.target.value)} value={inputValue} />
+      <Input
+        onChange={(event) => setInputValue(event.target.value)}
+        placeholder='Escribe un mensaje'
+        value={inputValue}
+      />
       <button className='h-fit w-fit' onClick={handleSendMessage}>
         <SendMessage className='text-light-700' height={24} width={24} />
       </button>
