@@ -10,6 +10,7 @@ const config: Config = {
     './src/chat/**/*.{js,ts,jsx,tsx,mdx}',
     './src/auth/**/*.{js,ts,jsx,tsx,mdx}',
     './src/shared/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/user/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -31,6 +32,8 @@ const config: Config = {
         'light-300': '#d1d7db',
         'light-500': '#aebac1',
         'light-700': '#8696a0',
+        'light-800': '#667781',
+        'light-900': '#676f73',
 
         'success-300': '#00a884',
         'success-500': '#008069',

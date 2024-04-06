@@ -7,7 +7,9 @@ interface GetRequestInit extends Omit<RequestInit, 'method'> {}
 
 const checkResponse = async (response: Response) => {
   if (response.status >= 400) {
-    throw new Error(response.statusText)
+    const json = await response.json()
+
+    throw new Error(json.message)
   }
 }
 
